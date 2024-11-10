@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html>: Declares the document type as HTML5,
+    which is standard for modern web pages and enables the browser to interpret the page as HTML5. -->
+<html lang="en">
+<!-- <html lang="en">: Begins the HTML document. The lang="en" attribute specifies that
+     the language of the document is English, which assists with accessibility and SEO. -->
+<head>
+<!-- <head>: Contains meta-information about the document,
+     which doesn’t display on the page but provides information for browsers and search engines. -->
+    <meta charset="UTF-8">
+    <!-- <meta charset="UTF-8">: Specifies the character encoding as UTF-8,
+         supporting a wide range of characters from various languages. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">:
+         Configures the viewport for responsive design, ensuring the page scales correctly on
+         different devices. The width=device-width part sets the viewport width to match the device's width
+         and initial-scale=1.0 sets the initial zoom level to 100%. -->
+    <title>My Web App</title>
+    <!-- <title>My Web App</title>: Sets the title of the webpage, which appears in the browser tab. -->
+</head>
+<body>
+<!-- <body>: Contains the main content that displays on the webpage. -->
+    <h1>Items</h1>
+    <!-- <h1>Items</h1>: An <h1> header with the text "Items," which serves as the main title of the page. -->
+    <ul>
+    <!-- <ul>: Begins an unordered list that will display each item’s name as a list item. -->
+        {% if items %}
+            {% for item in items %}
+                <li>{{ item.name }}</li>
+            {% endfor %}
+        {% else %}
+            <p>No items available.</p>
+        {% endif %}
+    </ul>
+</body>
+</html>

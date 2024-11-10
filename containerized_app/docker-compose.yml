@@ -1,0 +1,64 @@
+# This is a docker-compose.yml file, which is used to define and configure multiple Docker containers
+# as services in a single YAML file. Each service can have its own image, configuration, and network settings.
+version: '3.8'
+# version: '3.8': Specifies the version of the Docker Compose file format being used.
+# Version 3.8 is commonly used for compatibility with modern Docker features.
+
+services:
+# This section defines the individual services (containers) that Docker Compose will run.
+# In this file, there are two services: web and db.
+  web:
+  # web: Defines the web application service. This service will run the Flask application.
+    build: .
+    # build: .: Specifies the current directory (.) as the build context for the web service.
+    # Docker will look for a Dockerfile in this directory to build the container image.
+    ports:
+      - "5001:5000"
+    # Maps port 5001 on the host to 5000 in the container.
+    # This means accessing http://localhost:5001 on the host machine will route traffic
+    # to port 5000 in the container where the Flask app is running.
+    depends_on:
+      - db
+    # Specifies that the web service depends on the db service,
+    # so Docker Compose will start the db container before the web container.
+    environment:
+    # Sets environment variables within the web container.
+    # Here, DATABASE_URL provides the connection string to the PostgreSQL database:
+      - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
+      # postgresql://: Specifies the connection protocol.
+      # user:password: Username and password for the database.
+      # @db: The hostname of the database container (named db in this configuration).
+      # 5432: The default port for PostgreSQL.
+      # mydatabase: The name of the database to connect to.
+    container_name: web_container
+    # container_name: web_container:
+    # Names the container web_container for easier identification and management.
+
+  db:
+  # db: Defines the database service that will use PostgreSQL.
+    image: postgres:latest
+    # image: postgres: Specifies the Docker image to use for the db service.
+    # Here, it uses the latest version of the official postgres image from Docker Hub.
+    environment:
+    # Configures environment variables for the PostgreSQL container:
+      POSTGRES_DB: mydatabase
+      # POSTGRES_DB: The name of the database to be created.
+      POSTGRES_USER: user
+      # POSTGRES_USER: Username for the database.
+      POSTGRES_PASSWORD: password
+      # POSTGRES_PASSWORD: Password for the database user.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Mounts a named volume postgres_data to /var/lib/postgresql/data in the container,
+      # which is the location where PostgreSQL stores its data.
+      # This allows the database to persist even if the container is removed.
+    container_name: db_container
+    # container_name: db_container: Names the container db_container for easier management.
+    restart: always
+    # restart: always: Configures the container to always restart if it stops or crashes,
+    # ensuring the database remains available.
+
+volumes:
+# Defines a named volume called postgres_data, which will be used to persist the PostgreSQL data
+# outside the container lifecycle, preventing data loss when containers are restarted or recreated.
+  postgres_data:

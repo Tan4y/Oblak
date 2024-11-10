@@ -1,0 +1,22 @@
+Flask>=2.2.5
+# Flask is a lightweight web framework for Python that is used to create web applications.
+# Flask>=2.2.5: Specifies that the Flask package is required, and the version must be 2.2.5 or higher.
+# The >= symbol ensures that any version greater than or equal to 2.2.5 is acceptable,
+# providing flexibility while maintaining compatibility with the application’s code.
+Werkzeug>=2.2.2
+# Werkzeug is a comprehensive WSGI (Web Server Gateway Interface) library that provides utilities
+# for request and response handling, routing, and security.
+# Flask relies on Werkzeug for many underlying operations.
+# Werkzeug>=2.2.2: Specifies that Werkzeug (a dependency of Flask) is required,
+# with a version of 2.2.2 or higher.
+psycopg2-binary
+# psycopg2-binary is a PostgreSQL database adapter for Python,
+# allowing Python code to interact with PostgreSQL databases. The -binary version includes
+# precompiled binaries, making it easier to install but potentially less customizable than
+# psycopg2 without -binary.
+# psycopg2-binary: Specifies that the psycopg2-binary package is required, with no specific version constraint.
+Flask-SQLAlchemy
+#Flask-SQLAlchemy is an extension for Flask that integrates SQLAlchemy (an ORM, or Object-Relational Mapper)
+# into Flask applications. This package simplifies database operations by allowing you
+# to work with Python objects instead of writing SQL queries directly.
+# Flask-SQLAlchemy: Specifies that Flask-SQLAlchemy is required, again with no specific version constraint.
